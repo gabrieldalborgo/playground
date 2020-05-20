@@ -12,6 +12,8 @@ jobs:
       matrix:
         os: [windows-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      working-directory: ./dotnet/Demo01
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +23,10 @@ jobs:
         dotnet-version: 3.1.101
     - name: Install dependencies
       run: dotnet restore
+      working-directory: ${{env.working-directory}}
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: ${{env.working-directory}}
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      working-directory: ${{env.working-directory}}
