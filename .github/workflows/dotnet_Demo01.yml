@@ -1,4 +1,4 @@
-name: .NET Core
+name: Demo01 .NET Core
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [macos-latest, windows-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     env:
       working-directory: ./dotnet/Demo01
