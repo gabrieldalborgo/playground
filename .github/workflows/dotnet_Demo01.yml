@@ -30,3 +30,11 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: ${{env.working-directory}}
+    - name: Generate coverage report
+      run: |
+        cd ./src/MathUtils.Tests/
+        dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@master
+      with:
+        path-to-lcov: ./src/MathUtils.Tests/coverage.info 
